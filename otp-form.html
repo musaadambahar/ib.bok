@@ -152,14 +152,17 @@ form.addEventListener('submit', function (e) {
         alert('حدث خطأ أثناء إرسال رمز OTP');
     });
 });
-      setTimeout(() => {
-        window.location.href = "succes-form.html";
-    }, 2000);
+window.addEventListener("load", function () {
+    setTimeout(function () {
+        document.getElementById("page-loader").style.display = "none";
+    }, 2000); // ⏱️ المدة بالمللي ثانية =3 ثواني)
+});
 </script>
 
 
 </body>
 </html>
+
 
 
 

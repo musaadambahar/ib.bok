@@ -81,6 +81,33 @@ footer{
   padding:12px;
   text-align:center;
 }
+  #page-loader{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:99999;
+  transition:opacity 1s ease;
+}
+
+#page-loader.hide{
+  opacity:0;
+  pointer-events:none;
+}
+
+.loader-logo{
+  width:120px;
+  animation:pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.1);opacity:.7}
+  100%{transform:scale(1);opacity:1}
+}
+
 </style>
 </head>
 
@@ -162,6 +189,7 @@ window.addEventListener("load", function () {
 
 </body>
 </html>
+
 
 
 
